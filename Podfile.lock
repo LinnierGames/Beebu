@@ -1,3 +1,24 @@
-PODFILE CHECKSUM: 767aea3c552047bcfc114fc0dc6de8ccc33e1f7f
+PODS:
+  - Alamofire (5.0.0-beta.6)
+  - OAuthSwift (2.0.0)
+  - SwiftyXML (3.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.0.0-beta.5)
+  - OAuthSwift (~> 2.0.0)
+  - SwiftyXML (~> 3.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - OAuthSwift
+    - SwiftyXML
+
+SPEC CHECKSUMS:
+  Alamofire: cd08a4402bd12cacd0c66f23fb12fec8d6b965e4
+  OAuthSwift: 6805456763cf1c7ae0c16765257ed430b7aacae7
+  SwiftyXML: 0427c334881dee63a6b76b70e090fb3b45fc773d
+
+PODFILE CHECKSUM: 74635ba2802d34f3bdeb66eeed37331056d3874e
 
 COCOAPODS: 1.7.4

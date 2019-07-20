@@ -6,6 +6,8 @@ target 'ePool' do
   use_frameworks!
 
   # Pods for ePool
-
+  pod 'Alamofire', '~> 5.0.0-beta.5'
+  pod 'OAuthSwift', '~> 2.0.0'
+  pod 'SwiftyXML', '~> 3.0.0'
 
 end
