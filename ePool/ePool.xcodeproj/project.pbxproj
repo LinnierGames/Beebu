@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9647B08AC6137123BB3E30D9 /* Pods_ePool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFECDDC938A54772D91C8A3B /* Pods_ePool.framework */; };
 		E916E04322E3B02D00962BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E916E04222E3B02D00962BAE /* AppDelegate.swift */; };
 		E916E04522E3B02D00962BAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E916E04422E3B02D00962BAE /* ViewController.swift */; };
 		E916E04822E3B02D00962BAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E916E04622E3B02D00962BAE /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C9819F0AC551C250B0391F3 /* Pods-ePool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ePool.debug.xcconfig"; path = "Target Support Files/Pods-ePool/Pods-ePool.debug.xcconfig"; sourceTree = "<group>"; };
+		ACA02CCB0496D42B82228623 /* Pods-ePool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ePool.release.xcconfig"; path = "Target Support Files/Pods-ePool/Pods-ePool.release.xcconfig"; sourceTree = "<group>"; };
+		CFECDDC938A54772D91C8A3B /* Pods_ePool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ePool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E916E03F22E3B02D00962BAE /* ePool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ePool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E916E04222E3B02D00962BAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E916E04422E3B02D00962BAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9647B08AC6137123BB3E30D9 /* Pods_ePool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD92E5D770C48DD9A69F9C0C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3C9819F0AC551C250B0391F3 /* Pods-ePool.debug.xcconfig */,
+				ACA02CCB0496D42B82228623 /* Pods-ePool.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E5C06A2BBA4B4C1FF37FF679 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CFECDDC938A54772D91C8A3B /* Pods_ePool.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E916E03622E3B02D00962BAE = {
 			isa = PBXGroup;
 			children = (
 				E916E04122E3B02D00962BAE /* ePool */,
 				E916E04022E3B02D00962BAE /* Products */,
+				BD92E5D770C48DD9A69F9C0C /* Pods */,
+				E5C06A2BBA4B4C1FF37FF679 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +96,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E916E05122E3B02F00962BAE /* Build configuration list for PBXNativeTarget "ePool" */;
 			buildPhases = (
+				C7A7A427280459AD48DBC289 /* [CP] Check Pods Manifest.lock */,
 				E916E03B22E3B02D00962BAE /* Sources */,
 				E916E03C22E3B02D00962BAE /* Frameworks */,
 				E916E03D22E3B02D00962BAE /* Resources */,
@@ -129,6 +155,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C7A7A427280459AD48DBC289 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ePool-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E916E03B22E3B02D00962BAE /* Sources */ = {
@@ -280,6 +331,7 @@
 		};
 		E916E05222E3B02F00962BAE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C9819F0AC551C250B0391F3 /* Pods-ePool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -297,6 +349,7 @@
 		};
 		E916E05322E3B02F00962BAE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACA02CCB0496D42B82228623 /* Pods-ePool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
