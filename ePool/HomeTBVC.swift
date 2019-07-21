@@ -36,6 +36,8 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         self.view.addSubview(tableView)
+        
+        navigationController?.navigationBar.gestureRecognizers = [UITapGestureRecognizer(target: self, action:  #selector (self.profileClicked))]
     }
     override func viewDidAppear(_ animated: Bool) {
         loadData()
@@ -46,10 +48,10 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @objc func profileClicked()
     {
         print("Profile Pressed")
-//        let vc = ViewController()
-       // self.navigationController?.present(, animated: false, completion: nil)
+        let vc = ViewController()
+        self.navigationController?.present(vc, animated: false, completion: nil)
 //
-//        vc.pressSignIn(self)
+        vc.pressSignIn(self)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TripDetailView()
