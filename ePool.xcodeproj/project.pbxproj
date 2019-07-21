@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		AB3A4A7622E3B72C003DAAD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7422E3B72C003DAAD0 /* Main.storyboard */; };
 		AB3A4A7822E3B72D003DAAD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7722E3B72D003DAAD0 /* Assets.xcassets */; };
 		AB3A4A7B22E3B72D003DAAD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7922E3B72D003DAAD0 /* LaunchScreen.storyboard */; };
+		E9F3D72922E40ADD0044D53C /* eBayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F3D72822E40ADD0044D53C /* eBayService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		AB3A4A7C22E3B72D003DAAD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFF3E6413A3CA4503FB8CC1B /* Pods-ePool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ePool.release.xcconfig"; path = "Pods/Target Support Files/Pods-ePool/Pods-ePool.release.xcconfig"; sourceTree = "<group>"; };
 		E706FA6692CD656653D879E6 /* Pods-ePool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ePool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ePool/Pods-ePool.debug.xcconfig"; sourceTree = "<group>"; };
+		E9F3D72822E40ADD0044D53C /* eBayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eBayService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			children = (
 				AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */,
 				AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */,
+				E9F3D72822E40ADD0044D53C /* eBayService.swift */,
 				AB3A4A7422E3B72C003DAAD0 /* Main.storyboard */,
 				AB3A4A7722E3B72D003DAAD0 /* Assets.xcassets */,
 				AB3A4A7922E3B72D003DAAD0 /* LaunchScreen.storyboard */,
@@ -180,21 +183,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ePool/Pods-ePool-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyXML/SwiftyXML.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ePool/Pods-ePool-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyXML.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ePool/Pods-ePool-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ePool/Pods-ePool-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ePool/Pods-ePool-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -205,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */,
+				E9F3D72922E40ADD0044D53C /* eBayService.swift in Sources */,
 				AB3A4A7122E3B72C003DAAD0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
