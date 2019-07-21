@@ -9,18 +9,16 @@
 import MapKit
 import Foundation
 
-class MapView: UIViewController, MKMapViewDelegate
+class MapView: UIView, MKMapViewDelegate
 {
     var mapView = MKMapView()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        mapView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        mapView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         mapView.delegate = self
         centerMap(location: CLLocation(latitude: 37.7862002, longitude: -122.408004))
-        self.view.addSubview(mapView)
-        
+        addSubview(mapView)
     }
     
     func centerMap(location: CLLocation)
