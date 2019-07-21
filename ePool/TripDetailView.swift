@@ -40,10 +40,10 @@ class TripDetailView: UIViewController
         
         let backImage = UIImageView()
         backImage.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height:  self.view.bounds.height * 0.2)
-        backImage.contentMode = .scaleAspectFill
+        backImage.contentMode = .scaleToFill
         backImage.clipsToBounds = true
         backImage.alpha = 1
-        backImage.downloaded(from: trip.backImageUrl!)
+        backImage.downloaded(from: trip.backImageUrl!, contentMode: .scaleAspectFill)
         topView.addSubview(backImage)
         
         

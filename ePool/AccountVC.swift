@@ -12,8 +12,17 @@ import UIKit
 class AccountVC: UIViewController
 {
     override func viewDidAppear(_ animated: Bool) {
+        let bottom = navigationController?.navigationBar.frame.maxY
+        let top = self.view.safeAreaInsets.top
         
+        let imageView = UIImageView()
+        imageView.frame = CGRect(x: 0, y: bottom!, width: self.view.bounds.width, height: self.view.bounds.height - (bottom! + top))
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = #imageLiteral(resourceName: "profile")
+        imageView.layer.masksToBounds = true
+        imageView.clipsToBounds = true
         
+        self.view.addSubview(imageView)
     }
     override func viewWillLayoutSubviews() {
         
@@ -22,13 +31,6 @@ class AccountVC: UIViewController
         super.viewDidLoad()
         
         self.title = "Account"
-        let imageView = UIImageView()
-        imageView.frame = view.frame
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = #imageLiteral(resourceName: "profile")
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
         
-        self.view.addSubview(imageView)
     }
 }
