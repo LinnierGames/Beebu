@@ -16,12 +16,12 @@ class AccountVC: UIViewController
         
     }
     override func viewWillLayoutSubviews() {
-
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.title = "Account"
         let imageView = UIImageView()
         imageView.frame = view.frame
         imageView.contentMode = .scaleAspectFit

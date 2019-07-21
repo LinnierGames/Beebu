@@ -14,7 +14,7 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var hasAnimated = Bool()
     var tableView = UITableView()
     var trips = [Trip]()
-    
+    let ebayService = eBayService()
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let bottom = self.view.safeAreaInsets.bottom
@@ -47,9 +47,9 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.view.addSubview(tableView)
     }
     override func viewDidAppear(_ animated: Bool) {
-        dummyData()
-        hasAnimated = false
-        self.tableView.reloadData()
+        loadData()
+        
+        //self.tableView.reloadData()
     }
 
     @objc func profileClicked()
@@ -80,7 +80,13 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = HomeCell()
         cell.selectionStyle = .none
-        cell.backImage.image = trips[indexPath.row].backImage!
+        if let imgURL = trips[indexPath.row].backImageUrl
+        {
+            cell.backImage.downloaded(from: imgURL)
+        }else{
+            cell.backImage.image = trips[indexPath.row].backImage!
+        }
+        
         cell.tripLabel.text = trips[indexPath.row].name!
         cell.dateLabel.text = trips[indexPath.row].date!
         return cell
@@ -89,33 +95,61 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         trips = [Trip]()
         tableView.reloadData()
     }
-    
-    func dummyData()
+    func loadData()
     {
-        var trip = Trip()
-        trip.name = "Parker Road DIART"
-        trip.date = "JUL\n22"
-        trip.backImage = #imageLiteral(resourceName: "IMG_2984")
-        trips.append(trip)
-        
-        trip = Trip()
-        trip.name = "Ikea at Frisco"
-        trip.date = "JUL\n22"
-        trip.backImage = #imageLiteral(resourceName: "IMG_2984")
-        trips.append(trip)
-        
-        trip = Trip()
-        trip.name = "Parker Road DIART"
-        trip.date = "JUL\n23"
-        trip.backImage = #imageLiteral(resourceName: "IMG_2984")
-        trips.append(trip)
-        
-        trip = Trip()
-        trip.name = "Sprouts Farmers Market"
-        trip.date = "JUL\n23"
-        trip.backImage = #imageLiteral(resourceName: "IMG_2984")
-        trips.append(trip)
+        hasAnimated = false
+        ebayService.listListings { listing in
+            print(listing)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM"
+            let dateFormatter2 = DateFormatter()
+            dateFormatter2.dateFormat = "d"
+            for item in listing
+            {
+                var trip = Trip()
+                trip.name = item.title
+                let month = dateFormatter.string(from: item.date)
+                let day = dateFormatter2.string(from: item.date)
+                trip.date = ("\(month)\n\(day)")
+                trip.backImage = #imageLiteral(resourceName: "IMG_2984")
+                trip.price = item.price
+                trip.desc = item.description
+                if let url = item.thumbnail
+                {
+                    trip.backImageUrl = url
+                }
+                self.trips.append(trip)
+            }
+            self.tableView.reloadData()
+        }
+        //
     }
+//    func dummyData()
+//    {
+//        var trip = Trip()
+//        trip.name = "Parker Road DIART"
+//        trip.date = "JUL\n22"
+//        trip.backImage = #imageLiteral(resourceName: "IMG_2984")
+//        trips.append(trip)
+//
+//        trip = Trip()
+//        trip.name = "Ikea at Frisco"
+//        trip.date = "JUL\n22"
+//        trip.backImage = #imageLiteral(resourceName: "IMG_2984")
+//        trips.append(trip)
+//
+//        trip = Trip()
+//        trip.name = "Parker Road DIART"
+//        trip.date = "JUL\n23"
+//        trip.backImage = #imageLiteral(resourceName: "IMG_2984")
+//        trips.append(trip)
+//
+//        trip = Trip()
+//        trip.name = "Sprouts Farmers Market"
+//        trip.date = "JUL\n23"
+//        trip.backImage = #imageLiteral(resourceName: "IMG_2984")
+//        trips.append(trip)
+//    }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = cell as! HomeCell
         if(hasAnimated){return}
@@ -145,4 +179,7 @@ struct Trip
     var name: String?
     var date: String?
     var backImage: UIImage?
+    var backImageUrl: URL?
+    var price: Double?
+    var desc: String?
 }

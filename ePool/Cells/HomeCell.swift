@@ -39,11 +39,11 @@ class HomeCell: UITableViewCell{
         addSubview(backImage)
         
         tripLabel.frame = CGRect(x: 65, y: frame.height - 50, width: frame.width - 65, height: 50)
-        tripLabel.font = UIFont.systemFont(ofSize: 25.0)
+        tripLabel.font = UIFont.boldSystemFont(ofSize: 25)
         tripLabel.textAlignment = .left
         tripLabel.textColor = .white
-        //tripLabel.shadowColor = .black
-        //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
+        tripLabel.shadowColor = .black
+        tripLabel.shadowOffset = CGSize(width: -1, height: 1)
         tripLabel.adjustsFontSizeToFitWidth = true
         addSubview(tripLabel)
         
@@ -52,8 +52,8 @@ class HomeCell: UITableViewCell{
         dateLabel.font = UIFont.systemFont(ofSize: 20.0)
         dateLabel.textAlignment = .left
         dateLabel.textColor = .white
-        //dateLabel.shadowColor = .black
-        //dateLabel.shadowOffset = CGSize(width: -2, height: 2)
+        dateLabel.shadowColor = .black
+        dateLabel.shadowOffset = CGSize(width: -1, height: 1)
         dateLabel.adjustsFontSizeToFitWidth = true
         addSubview(dateLabel)
         

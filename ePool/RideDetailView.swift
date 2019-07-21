@@ -74,6 +74,9 @@ class RideDetailView: UIViewController
         origin.arival = "11:25 am"
         origin.type = false
         origin.startTime = "10:45 am"
+        origin.mapView.lat = CLLocationDegrees(floatLiteral: 33.1067262)
+        origin.mapView.long = CLLocationDegrees(floatLiteral: -96.6751474)
+        origin.mapView.annotationTitle = "400 Daisy Dr"
         origin.totalHeight = self.view.bounds.height
         
         let destination = TripOriginDestination()
@@ -83,8 +86,8 @@ class RideDetailView: UIViewController
         destination.type = true
         destination.startTime = "2:55 pm"
         destination.totalHeight = self.view.bounds.height
-        destination.mapView.lat = CLLocationDegrees(floatLiteral: 37.7862002)
-        destination.mapView.long = CLLocationDegrees(floatLiteral: -121.408004)
+        destination.mapView.lat = CLLocationDegrees(floatLiteral: 33.0942698)
+        destination.mapView.long = CLLocationDegrees(floatLiteral: -96.8227465)
         destination.mapView.annotationTitle = "Ikea"
         self.view.addViews(views: [origin,destination])
         

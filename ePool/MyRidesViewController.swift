@@ -81,7 +81,6 @@ extension MyRidesViewController {
         
     }
     
-<<<<<<< HEAD
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = RideDetailView()
         let animation = CATransition()
@@ -91,9 +90,6 @@ extension MyRidesViewController {
         self.view.window!.layer.add(animation, forKey: nil)
         navigationController?.present(vc, animated: false, completion: nil)
     }
-    
-=======
->>>>>>> master
     
 }
 

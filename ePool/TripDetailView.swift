@@ -15,6 +15,7 @@ class TripDetailView: UIViewController
     var trip = Trip()
     var topView = UIView()
     var buttonView = UIView()
+    let eBay = eBayService()
     
     override func viewDidLayoutSubviews() {
         
@@ -102,7 +103,7 @@ class TripDetailView: UIViewController
         
         let description = UITextView()
         description.frame = CGRect(x: 10, y: destination.frame.maxY, width: self.view.bounds.width - 20, height: self.view.bounds.height - (destination.frame.maxY + 70))
-        description.text = "Our weekly route to Ikea, where you can get everything you need in a household. Please be ready for pickup on time. Our bus will only wait till scheduled pickup time."
+        description.text = trip.desc//"Our weekly route to Ikea, where you can get everything you need in a household. Please be ready for pickup on time. Our bus will only wait till scheduled pickup time."
         description.textColor = .black
         description.textAlignment = .justified
         description.font = UIFont.systemFont(ofSize: 20.0)
@@ -127,7 +128,7 @@ class TripDetailView: UIViewController
         //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
         leftLabel.adjustsFontSizeToFitWidth = true
         leftLabel.numberOfLines = 2
-        leftLabel.text = ("$5.25")
+        leftLabel.text = ("$\(trip.price!)")
         buttonView.addSubview(leftLabel)
         
         let rightLabel = UILabel()
