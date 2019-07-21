@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29B9F33753C64B67C1D7584A /* Pods_ePool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36645259B2FA742A0DA1FF95 /* Pods_ePool.framework */; };
+		685E2842F27CF0A2BB8606DD /* Pods_ePool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C705517C8454EF4C7551C928 /* Pods_ePool.framework */; };
 		AB3A4A7122E3B72C003DAAD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */; };
 		AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */; };
 		AB3A4A7622E3B72C003DAAD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7422E3B72C003DAAD0 /* Main.storyboard */; };
 		AB3A4A7822E3B72D003DAAD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7722E3B72D003DAAD0 /* Assets.xcassets */; };
 		AB3A4A7B22E3B72D003DAAD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7922E3B72D003DAAD0 /* LaunchScreen.storyboard */; };
+		AB3A4A8722E3F218003DAAD0 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A8622E3F218003DAAD0 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36645259B2FA742A0DA1FF95 /* Pods_ePool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ePool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3A4A6D22E3B72C003DAAD0 /* ePool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ePool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,7 +24,9 @@
 		AB3A4A7722E3B72D003DAAD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB3A4A7A22E3B72D003DAAD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB3A4A7C22E3B72D003DAAD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB3A4A8622E3F218003DAAD0 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BFF3E6413A3CA4503FB8CC1B /* Pods-ePool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ePool.release.xcconfig"; path = "Pods/Target Support Files/Pods-ePool/Pods-ePool.release.xcconfig"; sourceTree = "<group>"; };
+		C705517C8454EF4C7551C928 /* Pods_ePool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ePool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E706FA6692CD656653D879E6 /* Pods-ePool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ePool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ePool/Pods-ePool.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -33,7 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29B9F33753C64B67C1D7584A /* Pods_ePool.framework in Frameworks */,
+				685E2842F27CF0A2BB8606DD /* Pods_ePool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */,
+				AB3A4A8622E3F218003DAAD0 /* MapView.swift */,
 				AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */,
 				AB3A4A7422E3B72C003DAAD0 /* Main.storyboard */,
 				AB3A4A7722E3B72D003DAAD0 /* Assets.xcassets */,
@@ -74,7 +77,7 @@
 		E1A2EC53EAB5DE77A875F720 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				36645259B2FA742A0DA1FF95 /* Pods_ePool.framework */,
+				C705517C8454EF4C7551C928 /* Pods_ePool.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */,
+				AB3A4A8722E3F218003DAAD0 /* MapView.swift in Sources */,
 				AB3A4A7122E3B72C003DAAD0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +358,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RUS5Y57VG8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ePool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -373,6 +381,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RUS5Y57VG8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ePool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
