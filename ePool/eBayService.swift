@@ -141,7 +141,7 @@ class eBayService {
           let itemDate = Date() // ItemSpecifics.NameValueList.Name.(Event Date/Event Time)
 
           let title = xml.Item.Title.stringValue
-          let prefix = "$$ePool$$ - "
+          let prefix = "$$Beebu$$ - "
           let formattedTitle: String
           if title.hasPrefix(prefix) {
             formattedTitle = String(title.dropFirst(prefix.count))

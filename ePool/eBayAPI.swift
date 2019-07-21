@@ -41,7 +41,7 @@ enum eBayFindAPI: TargetType {
   var task: Task {
     switch self {
     case .findAllListings:
-      let keywords = "$$ePool$$"
+      let keywords = "$$Beebu$$"
       let categoryID = "1306" // Tickets; Experiences:Other Tickets; Experiences
       return .requestParameters(
         parameters: [
