@@ -149,12 +149,15 @@ class eBayService {
             formattedTitle = title
           }
 
+          let description = xml.Item.Description.stringValue
+          let formattedDescription = description.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+
           listingData.append(ListingData(
             itemId: xml.Item.ItemID.stringValue,
             title: formattedTitle,
             price: Double(xml.Item.SellingStatus.CurrentPrice.stringValue) ?? 0,
             date: itemDate,
-            description: xml.Item.Description.stringValue,
+            description: formattedDescription,
             thumbnail: URL(string: xml.Item.PictureDetails.PictureURL.stringValue),
             storeUrl: URL(string: xml.Item.ListingDetails.ViewItemURL.stringValue)))
           dg.leave()
