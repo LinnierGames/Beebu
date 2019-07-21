@@ -139,9 +139,19 @@ class eBayService {
           let xml = XML(data: data)!
 
           let itemDate = Date() // ItemSpecifics.NameValueList.Name.(Event Date/Event Time)
+
+          let title = xml.Item.Title.stringValue
+          let prefix = "$$ePool$$ - "
+          let formattedTitle: String
+          if title.hasPrefix(prefix) {
+            formattedTitle = String(title.dropFirst(prefix.count))
+          } else {
+            formattedTitle = title
+          }
+
           listingData.append(ListingData(
             itemId: xml.Item.ItemID.stringValue,
-            title: xml.Item.Title.stringValue,
+            title: formattedTitle,
             price: Double(xml.Item.SellingStatus.CurrentPrice.stringValue) ?? 0,
             date: itemDate,
             description: xml.Item.Description.stringValue,
