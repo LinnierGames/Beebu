@@ -15,10 +15,11 @@ class TabBar: UIViewController
     var homeButton = tabBarButton()
     var myRidesButton = tabBarButton()
     var profileButton = tabBarButton()
-    var viewControllerStrings = ["Home","MyRides","Account"]
-    var viewControllers = [UINavigationController(rootViewController: HomeTBVC()),UINavigationController(rootViewController: HomeTBVC()),UINavigationController(rootViewController: HomeTBVC())]
     var prevButton: tabBarButton?
     var prevVC: UIViewController?
+    var viewControllerStrings = [String]()
+    var viewControllers = [UIViewController]()
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
          let bottom = self.view.safeAreaInsets.bottom
@@ -27,6 +28,11 @@ class TabBar: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Tab Bar was loaded")
+        let storyboard = UIStoryboard(name: "MyRidesViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "MyRidesViewController")
+        
+        viewControllerStrings = ["Home","MyRides","Account"]
+        viewControllers = [UINavigationController(rootViewController: HomeTBVC()),UINavigationController(rootViewController: controller),UINavigationController(rootViewController: HomeTBVC())]
         
         buttonContainer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.8)
         buttonContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
