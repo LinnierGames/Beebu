@@ -15,6 +15,7 @@ class MyRidesViewController: UITableViewController {
         
         // Do any additional setup after loading the view.
         self.title = "My Rides"
+
         self.tableView.separatorStyle = .none
     }
     
@@ -80,6 +81,7 @@ extension MyRidesViewController {
         
     }
     
+<<<<<<< HEAD
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = RideDetailView()
         let animation = CATransition()
@@ -90,6 +92,8 @@ extension MyRidesViewController {
         navigationController?.present(vc, animated: false, completion: nil)
     }
     
+=======
+>>>>>>> master
     
 }
 

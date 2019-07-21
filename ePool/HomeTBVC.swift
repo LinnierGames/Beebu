@@ -55,6 +55,10 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @objc func profileClicked()
     {
         print("Profile Pressed")
+//        let vc = ViewController()
+       // self.navigationController?.present(, animated: false, completion: nil)
+//
+//        vc.pressSignIn(self)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TripDetailView()
