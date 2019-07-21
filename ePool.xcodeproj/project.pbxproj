@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		685E2842F27CF0A2BB8606DD /* Pods_ePool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C705517C8454EF4C7551C928 /* Pods_ePool.framework */; };
+		7A950B8422E4398C0044E126 /* TripActiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A950B8322E4398C0044E126 /* TripActiveTableViewCell.swift */; };
+		7A950B8622E439B30044E126 /* TripPastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A950B8522E439B30044E126 /* TripPastTableViewCell.swift */; };
+		7A9E951822E40C2900201E36 /* MyRidesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9E951722E40C2900201E36 /* MyRidesViewController.storyboard */; };
+		7A9E951A22E42D6900201E36 /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9E951922E42D6900201E36 /* MyRidesViewController.swift */; };
 		AB3A4A7122E3B72C003DAAD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */; };
 		AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */; };
 		AB3A4A7622E3B72C003DAAD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7422E3B72C003DAAD0 /* Main.storyboard */; };
@@ -17,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A950B8322E4398C0044E126 /* TripActiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripActiveTableViewCell.swift; sourceTree = "<group>"; };
+		7A950B8522E439B30044E126 /* TripPastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPastTableViewCell.swift; sourceTree = "<group>"; };
+		7A9E951722E40C2900201E36 /* MyRidesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRidesViewController.storyboard; sourceTree = "<group>"; };
+		7A9E951922E42D6900201E36 /* MyRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
 		AB3A4A6D22E3B72C003DAAD0 /* ePool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ePool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +78,10 @@
 				AB3A4A7722E3B72D003DAAD0 /* Assets.xcassets */,
 				AB3A4A7922E3B72D003DAAD0 /* LaunchScreen.storyboard */,
 				AB3A4A7C22E3B72D003DAAD0 /* Info.plist */,
+				7A9E951722E40C2900201E36 /* MyRidesViewController.storyboard */,
+				7A950B8322E4398C0044E126 /* TripActiveTableViewCell.swift */,
+				7A950B8522E439B30044E126 /* TripPastTableViewCell.swift */,
+				7A9E951922E42D6900201E36 /* MyRidesViewController.swift */,
 			);
 			path = ePool;
 			sourceTree = "<group>";
@@ -153,6 +165,7 @@
 			files = (
 				AB3A4A7B22E3B72D003DAAD0 /* LaunchScreen.storyboard in Resources */,
 				AB3A4A7822E3B72D003DAAD0 /* Assets.xcassets in Resources */,
+				7A9E951822E40C2900201E36 /* MyRidesViewController.storyboard in Resources */,
 				AB3A4A7622E3B72C003DAAD0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,21 +196,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ePool/Pods-ePool-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyXML/SwiftyXML.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ePool/Pods-ePool-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyXML.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ePool/Pods-ePool-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ePool/Pods-ePool-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ePool/Pods-ePool-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -207,8 +215,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A950B8622E439B30044E126 /* TripPastTableViewCell.swift in Sources */,
 				AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */,
+				7A950B8422E4398C0044E126 /* TripActiveTableViewCell.swift in Sources */,
 				AB3A4A8722E3F218003DAAD0 /* MapView.swift in Sources */,
+				7A9E951A22E42D6900201E36 /* MyRidesViewController.swift in Sources */,
 				AB3A4A7122E3B72C003DAAD0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
