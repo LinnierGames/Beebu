@@ -26,6 +26,16 @@ struct Listing {
   let storeUrl: URL?
 }
 
+struct PurchasedListing {
+  let roundTrip: String
+  let origin: String
+  let destination: String
+  let outboundPickup: String
+  let outboundArrival: String
+  let inboundPickup: String
+  let inboundArrival: String
+}
+
 extension Listing {
   fileprivate init(_ listingData: ListingData) {
     self.itemId = listingData.itemId
@@ -85,6 +95,33 @@ class eBayService {
       }))
   }
 
+  func listPurchasedItems() -> (currentListings: [PurchasedListing], pastListings: [PurchasedListing]) {
+    return (
+      [
+        PurchasedListing(
+          roundTrip: "JUL 22",
+          origin: "400 Daisy Dr., Allen, TX 75013",
+          destination: "Ikea at Frisco",
+          outboundPickup: "10:45 am",
+          outboundArrival: "11:25 am",
+          inboundPickup: "2:15 pm",
+          inboundArrival: "2:55 pm")
+      ],
+      [
+        PurchasedListing(
+          roundTrip: "JUL 5",
+          origin: "400 Daisy Dr., Allen, TX 75013",
+          destination: "Sprouts Farmers Market at Preston",
+          outboundPickup: "10:45 am",
+          outboundArrival: "11:25 am",
+          inboundPickup: "2:15 pm",
+          inboundArrival: "2:55 pm")
+      ]
+    )
+  }
+
+  // MARK: - Private
+
   private func populate(_ ids: [String], completion: @escaping ([ListingData]?) -> Void) {
     guard let token = self.accessToken else {
       return completion(nil)
@@ -102,12 +139,25 @@ class eBayService {
           let xml = XML(data: data)!
 
           let itemDate = Date() // ItemSpecifics.NameValueList.Name.(Event Date/Event Time)
+
+          let title = xml.Item.Title.stringValue
+          let prefix = "$$Beebu$$ - "
+          let formattedTitle: String
+          if title.hasPrefix(prefix) {
+            formattedTitle = String(title.dropFirst(prefix.count))
+          } else {
+            formattedTitle = title
+          }
+
+          let description = xml.Item.Description.stringValue
+          let formattedDescription = description.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+
           listingData.append(ListingData(
             itemId: xml.Item.ItemID.stringValue,
-            title: xml.Item.Title.stringValue,
+            title: formattedTitle,
             price: Double(xml.Item.SellingStatus.CurrentPrice.stringValue) ?? 0,
             date: itemDate,
-            description: xml.Item.Description.stringValue,
+            description: formattedDescription,
             thumbnail: URL(string: xml.Item.PictureDetails.PictureURL.stringValue),
             storeUrl: URL(string: xml.Item.ListingDetails.ViewItemURL.stringValue)))
           dg.leave()
@@ -119,8 +169,6 @@ class eBayService {
       completion(listingData)
     }
   }
-
-  // MARK: - Private
 
   private func noftifyIfUserTokenAlreadyExists() {
     if UserDefaults.standard.string(forKey: "USER_ACCESS_TOKEN") != nil {

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import WebKit
 class TripDetailView: UIViewController
 {
     
@@ -16,7 +16,7 @@ class TripDetailView: UIViewController
     var topView = UIView()
     var buttonView = UIView()
     let eBay = eBayService()
-    
+    let webView = WKWebView()
     override func viewDidLayoutSubviews() {
         
         let bottom = self.view.safeAreaInsets.bottom
@@ -43,7 +43,7 @@ class TripDetailView: UIViewController
         backImage.contentMode = .scaleAspectFill
         backImage.clipsToBounds = true
         backImage.alpha = 1
-        backImage.image = trip.backImage
+        backImage.downloaded(from: trip.backImageUrl!)
         topView.addSubview(backImage)
         
         
@@ -150,6 +150,14 @@ class TripDetailView: UIViewController
     {
         print("purchaseWithEbayPressed")
         sender.view?.shake()
+        
+        webView.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 0)
+        view.addSubview(webView)
+        webView.load(URLRequest(url: trip.checkout!))
+        UIView.animate(withDuration: 0.3, animations: {
+            self.webView.frame = CGRect(x: 0, y: self.view.bounds.height * 0.2, width: self.view.bounds.width, height: self.view.bounds.height -  self.view.bounds.height * 0.2)
+            })
+       
     }
     @objc func backPressed()
     {

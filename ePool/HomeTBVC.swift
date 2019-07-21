@@ -28,15 +28,6 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Allen, TX"
-       
-        let button =  UIButton(type: .custom)
-        button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
-        button.backgroundColor = .clear
-        button.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
-        button.setTitle("Allen, TX", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 22.0)
-        button.addTarget(self, action: #selector(profileClicked), for: .touchUpInside)
-        navigationItem.titleView = button
         
         print("TableView Loaded")
         tableView.delegate = self
@@ -114,6 +105,7 @@ class HomeTBVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 trip.backImage = #imageLiteral(resourceName: "IMG_2984")
                 trip.price = item.price
                 trip.desc = item.description
+                trip.checkout = item.storeUrl
                 if let url = item.thumbnail
                 {
                     trip.backImageUrl = url
@@ -182,4 +174,5 @@ struct Trip
     var backImageUrl: URL?
     var price: Double?
     var desc: String?
+    var checkout: URL?
 }
