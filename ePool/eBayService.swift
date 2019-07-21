@@ -19,6 +19,9 @@ protocol eBayServiceDelegate: class {
 struct Listing {
   let itemId: String
   let title: String
+  let price: Double
+  let date: Date
+  let description: String
   let thumbnail: URL?
   let storeUrl: URL?
 }
@@ -27,6 +30,9 @@ extension Listing {
   fileprivate init(_ listingData: ListingData) {
     self.itemId = listingData.itemId
     self.title = listingData.title
+    self.price = listingData.price
+    self.date = listingData.date
+    self.description = listingData.description
     self.thumbnail = listingData.thumbnail
     self.storeUrl = listingData.storeUrl
   }
@@ -35,6 +41,9 @@ extension Listing {
 struct ListingData: Decodable {
   let itemId: String
   let title: String
+  let price: Double
+  let date: Date
+  let description: String
   let thumbnail: URL?
   let storeUrl: URL?
 }
@@ -56,6 +65,7 @@ class eBayService {
   }
   private let eBayApi = MoyaProvider<eBayAPI>()
   private let eBayFindApi = MoyaProvider<eBayFindAPI>()
+  private let eBayTradingApi = MoyaProvider<eBayTradingAPI>()
 
   func listListings(_ completion: @escaping ([Listing]) -> Void) {
     self.eBayFindApi.request(
@@ -63,32 +73,51 @@ class eBayService {
       completion: self.handleResponse(data: { data in
         guard let data = data else { return }
         let xml = XML(data: data)!
-        var listingData: [ListingData] = []
         guard Int(try! xml.searchResult.getXML().attributes["count"] ?? "0")! != 0 else {
           return completion([])
         }
 
-        for item in xml.searchResult.item {
-          listingData.append(ListingData(
-            itemId: item.itemId.stringValue,
-            title: item.title.stringValue,
-            thumbnail: URL(string: item.galleryURL.stringValue),
-            storeUrl: URL(string: item.viewItemURL.stringValue)))
+        let listingIds = xml.searchResult.item.map { $0.itemId.stringValue }
+
+        self.populate(listingIds) { listingData in
+          completion(listingData?.map(Listing.init) ?? [])
         }
-
-        completion(listingData.map(Listing.init))
       }))
+  }
 
+  private func populate(_ ids: [String], completion: @escaping ([ListingData]?) -> Void) {
+    guard let token = self.accessToken else {
+      return completion(nil)
+    }
 
+    let payload = UserAuthPayload(userToken: token)
+    let dg = DispatchGroup()
+    var listingData: [ListingData] = []
+    for id in ids {
+      dg.enter()
+      self.eBayTradingApi.request(
+        .getItem(id: id, auth: payload),
+        completion: self.handleResponse(data: { data in
+          guard let data = data else { return }
+          let xml = XML(data: data)!
 
+          let itemDate = Date() // ItemSpecifics.NameValueList.Name.(Event Date/Event Time)
+          listingData.append(ListingData(
+            itemId: xml.Item.ItemID.stringValue,
+            title: xml.Item.Title.stringValue,
+            price: Double(xml.Item.SellingStatus.CurrentPrice.stringValue) ?? 0,
+            date: itemDate,
+            description: xml.Item.Description.stringValue,
+            thumbnail: URL(string: xml.Item.PictureDetails.PictureURL.stringValue),
+            storeUrl: URL(string: xml.Item.ListingDetails.ViewItemURL.stringValue)))
+          dg.leave()
+        }
+      ))
+    }
 
-//    self.handleResponse({ (listingData: [ListingData]?) in
-//      guard let listingData = listingData else {
-//        return completion([])
-//      }
-//
-//      completion(listingData.map(Listing.init))
-//    })
+    dg.notify(queue: .main) {
+      completion(listingData)
+    }
   }
 
   // MARK: - Private

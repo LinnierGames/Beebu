@@ -25,9 +25,6 @@ class ViewController: UIViewController {
 
 extension ViewController: eBayServiceDelegate {
   func eBayDidLoadUserCredentials(_ eBayService: eBayService) {
-//    let alert = UIAlertController(title: "Logged in!", message: "the user is logged in!", preferredStyle: .alert)
-//    alert.addAction(UIAlertAction(title: "Dismiss", style: .default))
-//    self.present(alert, animated: true)
     eBayService.listListings { listing in
       print(listing)
     }

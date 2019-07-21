@@ -9,6 +9,10 @@
 import Foundation
 import Moya
 
+struct UserAuthPayload {
+  let userToken: String
+}
+
 enum eBayFindAPI: TargetType {
   case findAllListings
 
@@ -52,8 +56,58 @@ enum eBayFindAPI: TargetType {
     switch self {
     case .findAllListings:
       return [
-        "X-EBAY-SOA-SECURITY-APPNAME":eBayService.clientID,
-        "X-EBAY-SOA-OPERATION-NAME":"findItemsAdvanced"
+        "X-EBAY-SOA-SECURITY-APPNAME": eBayService.clientID,
+        "X-EBAY-SOA-OPERATION-NAME": "findItemsAdvanced"
+      ]
+    }
+  }
+}
+
+enum eBayTradingAPI: TargetType {
+  case getItem(id: String, auth: UserAuthPayload)
+
+  var baseURL: URL {
+    return URL(string: "https://api.ebay.com/ws/api.dll")!
+  }
+
+  var path: String {
+    return ""
+  }
+
+  var method: Moya.Method {
+    return .post
+  }
+
+  var sampleData: Data {
+    return Data()
+  }
+
+  var task: Task {
+    switch self {
+    case .getItem(let id, _):
+      let xml =
+      """
+      <?xml version="1.0" encoding="utf-8"?>
+      <GetItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+        <DetailLevel>ReturnAll</DetailLevel>
+        <ErrorLanguage>en_US</ErrorLanguage>
+        <WarningLevel>High</WarningLevel>
+        <ItemID>\(id)</ItemID>
+      </GetItemRequest>
+      """
+
+      return .requestData(xml.data(using: .utf8)!)
+    }
+  }
+
+  var headers: [String : String]? {
+    switch self {
+    case .getItem(_, let auth):
+      return [
+        "X-EBAY-API-SITEID": "0",
+        "X-EBAY-API-COMPATIBILITY-LEVEL": "967",
+        "X-EBAY-API-CALL-NAME": "GetItem",
+        "X-EBAY-API-IAF-TOKEN": auth.userToken
       ]
     }
   }
