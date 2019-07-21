@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        self.present(HomeTBVC(), animated: false, completion: nil)
         //addMap()
     }
     
