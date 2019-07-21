@@ -10,15 +10,11 @@ import UIKit
 
 class TripActiveTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+  @IBOutlet weak var roundTrip: UILabel!
+  @IBOutlet weak var origin: UILabel!
+  @IBOutlet weak var destination: UILabel!
+  @IBOutlet weak var outboundPickup: UILabel!
+  @IBOutlet weak var outboundArrival: UILabel!
+  @IBOutlet weak var inboundPickup: UILabel!
+  @IBOutlet weak var inboundArrival: UILabel!
 }

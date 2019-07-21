@@ -210,6 +210,15 @@
                                         <constraint firstItem="XmI-LE-e25" firstAttribute="width" secondItem="94I-Q4-XgJ" secondAttribute="width" multiplier="0.95" id="rpx-2f-2Lv"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="destination" destination="s3t-Gb-Tqt" id="QC8-2N-kRQ"/>
+                                    <outlet property="inboundArrival" destination="n6J-pG-Vti" id="p1A-gT-SC8"/>
+                                    <outlet property="inboundPickup" destination="hgb-sW-VEI" id="koE-Mu-6t8"/>
+                                    <outlet property="origin" destination="vvb-AC-zyb" id="mBz-u5-Tmw"/>
+                                    <outlet property="outboundArrival" destination="Ncw-kM-rtz" id="cqd-pC-eOU"/>
+                                    <outlet property="outboundPickup" destination="PXW-BK-hKr" id="zZM-BW-7Dn"/>
+                                    <outlet property="roundTrip" destination="8xz-kE-yRU" id="dwh-NV-0fA"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tripPastCell" rowHeight="121" id="4ua-36-og4" customClass="TripPastTableViewCell" customModule="ePool" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="259" width="414" height="121"/>
@@ -305,6 +314,11 @@
                                         <constraint firstItem="JRL-CY-vAw" firstAttribute="width" secondItem="NH8-Wm-DDv" secondAttribute="width" multiplier="0.95" id="vgl-ku-CtI"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="destination" destination="0as-lF-POw" id="iQH-Dk-w6w"/>
+                                    <outlet property="origin" destination="Dda-UQ-KpK" id="WmA-9q-lDU"/>
+                                    <outlet property="roundTrip" destination="F9M-sv-pPZ" id="6tD-AH-Dqo"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

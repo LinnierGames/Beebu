@@ -10,13 +10,24 @@ import UIKit
 
 class MyRidesViewController: UITableViewController {
 
-  let eBayService = eBayService()
+  let eBay = eBayService()
+  var currentListings: [PurchasedListing] = []
+  var pastListings: [PurchasedListing] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     // Do any additional setup after loading the view.
     self.tableView.separatorStyle = .none
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    let result = self.eBay.listPurchasedItems()
+    self.currentListings = result.currentListings
+    self.pastListings = result.pastListings
+    self.tableView.reloadData()
   }
 
 }
@@ -56,17 +67,33 @@ extension MyRidesViewController {
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return [self.currentListings, self.pastListings][section].count
   }
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
       let cell = tableView.dequeueReusableCell(withIdentifier: "tripActiveCell", for: indexPath) as! TripActiveTableViewCell
       cell.selectionStyle = .none
+
+//      let listing = self.currentListings[indexPath.row]
+//      cell.roundTrip.text = listing.roundTrip
+//      cell.origin.text = listing.origin
+//      cell.destination.text = listing.destination
+//      cell.outboundPickup.text = listing.outboundPickup
+//      cell.outboundArrival.text = listing.outboundArrival
+//      cell.inboundPickup.text = listing.inboundPickup
+//      cell.inboundArrival.text = listing.inboundArrival
+
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: "tripPastCell", for: indexPath) as! TripPastTableViewCell
       cell.selectionStyle = .none
+
+//      let listing = self.pastListings[indexPath.row]
+//      cell.roundTrip.text = listing.roundTrip
+//      cell.origin.text = listing.origin
+//      cell.destination.text = listing.destination
+
       return cell
     }
 

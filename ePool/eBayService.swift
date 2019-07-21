@@ -26,6 +26,16 @@ struct Listing {
   let storeUrl: URL?
 }
 
+struct PurchasedListing {
+  let roundTrip: String
+  let origin: String
+  let destination: String
+  let outboundPickup: String
+  let outboundArrival: String
+  let inboundPickup: String
+  let inboundArrival: String
+}
+
 extension Listing {
   fileprivate init(_ listingData: ListingData) {
     self.itemId = listingData.itemId
@@ -85,6 +95,33 @@ class eBayService {
       }))
   }
 
+  func listPurchasedItems() -> (currentListings: [PurchasedListing], pastListings: [PurchasedListing]) {
+    return (
+      [
+        PurchasedListing(
+          roundTrip: "JUL 22",
+          origin: "400 Daisy Dr., Allen, TX 75013",
+          destination: "Ikea at Frisco",
+          outboundPickup: "10:45 am",
+          outboundArrival: "11:25 am",
+          inboundPickup: "2:15 pm",
+          inboundArrival: "2:55 pm")
+      ],
+      [
+        PurchasedListing(
+          roundTrip: "JUL 5",
+          origin: "400 Daisy Dr., Allen, TX 75013",
+          destination: "Sprouts Farmers Market at Preston",
+          outboundPickup: "10:45 am",
+          outboundArrival: "11:25 am",
+          inboundPickup: "2:15 pm",
+          inboundArrival: "2:55 pm")
+      ]
+    )
+  }
+
+  // MARK: - Private
+
   private func populate(_ ids: [String], completion: @escaping ([ListingData]?) -> Void) {
     guard let token = self.accessToken else {
       return completion(nil)
@@ -119,8 +156,6 @@ class eBayService {
       completion(listingData)
     }
   }
-
-  // MARK: - Private
 
   private func noftifyIfUserTokenAlreadyExists() {
     if UserDefaults.standard.string(forKey: "USER_ACCESS_TOKEN") != nil {
