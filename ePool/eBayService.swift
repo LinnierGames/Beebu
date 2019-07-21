@@ -10,23 +10,33 @@ import UIKit
 import WebKit
 import Moya
 import Result
+import SwiftyXML
 
 protocol eBayServiceDelegate: class {
   func eBayDidLoadUserCredentials(_ eBayService: eBayService)
 }
 
 struct Listing {
-
+  let itemId: String
+  let title: String
+  let thumbnail: URL?
+  let storeUrl: URL?
 }
 
 extension Listing {
   fileprivate init(_ listingData: ListingData) {
-
+    self.itemId = listingData.itemId
+    self.title = listingData.title
+    self.thumbnail = listingData.thumbnail
+    self.storeUrl = listingData.storeUrl
   }
 }
 
 struct ListingData: Decodable {
-
+  let itemId: String
+  let title: String
+  let thumbnail: URL?
+  let storeUrl: URL?
 }
 
 class eBayService {
@@ -34,22 +44,59 @@ class eBayService {
   static let clientSecret = "PRD-d8d798b5fe8a-d704-4c61-b082-9dc2"
   static let ruName = "Erick_Sanchez-ErickSan-Sample-eflcxsc"
 
-  weak var delegate: eBayServiceDelegate?
+  weak var delegate: eBayServiceDelegate? {
+    didSet {
+      self.noftifyIfUserTokenAlreadyExists()
+    }
+  }
   var currentAuthViewController: EbayVc? = nil
 
   private var accessToken: String? {
     return UserDefaults.standard.string(forKey: "USER_ACCESS_TOKEN")
   }
   private let eBayApi = MoyaProvider<eBayAPI>()
+  private let eBayFindApi = MoyaProvider<eBayFindAPI>()
 
   func listListings(_ completion: @escaping ([Listing]) -> Void) {
-    self.eBayApi.request(.listListings, completion: self.handleResponse({ (listingData: [ListingData]?) in
-      guard let listingData = listingData else {
-        return completion([])
-      }
+    self.eBayFindApi.request(
+      .findAllListings,
+      completion: self.handleResponse(data: { data in
+        guard let data = data else { return }
+        let xml = XML(data: data)!
+        var listingData: [ListingData] = []
+        guard Int(try! xml.searchResult.getXML().attributes["count"] ?? "0")! != 0 else {
+          return completion([])
+        }
 
-      completion(listingData.map(Listing.init))
-    }))
+        for item in xml.searchResult.item {
+          listingData.append(ListingData(
+            itemId: item.itemId.stringValue,
+            title: item.title.stringValue,
+            thumbnail: URL(string: item.galleryURL.stringValue),
+            storeUrl: URL(string: item.viewItemURL.stringValue)))
+        }
+
+        completion(listingData.map(Listing.init))
+      }))
+
+
+
+
+//    self.handleResponse({ (listingData: [ListingData]?) in
+//      guard let listingData = listingData else {
+//        return completion([])
+//      }
+//
+//      completion(listingData.map(Listing.init))
+//    })
+  }
+
+  // MARK: - Private
+
+  private func noftifyIfUserTokenAlreadyExists() {
+    if UserDefaults.standard.string(forKey: "USER_ACCESS_TOKEN") != nil {
+      self.delegate?.eBayDidLoadUserCredentials(self)
+    }
   }
 
   private func fetchUserAccessToken(from code: String) {
@@ -98,6 +145,7 @@ class eBayService {
 
   private func store(_ accessToken: String) {
     UserDefaults.standard.set(accessToken, forKey: "USER_ACCESS_TOKEN")
+    print(accessToken)
   }
 }
 
