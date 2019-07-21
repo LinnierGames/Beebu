@@ -14,6 +14,7 @@ class TripDetailView: UIViewController
     
     var trip = Trip()
     var topView = UIView()
+    var buttonView = UIView()
     
     override func viewWillLayoutSubviews() {
         navigationController?.isNavigationBarHidden = true
@@ -22,8 +23,9 @@ class TripDetailView: UIViewController
         super.viewDidLoad()
         view.backgroundColor = .white
         setTopView()
-        setBottomView()
         setBottomButton()
+        setBottomView()
+        
         
     }
     
@@ -67,7 +69,7 @@ class TripDetailView: UIViewController
         
         self.view.addSubview(topView)
         
-        let backbutton = UIButton(frame: CGRect(x: 25, y: 30, width: 40, height: 40))
+        let backbutton = UIButton(frame: CGRect(x: 15, y: 30, width: 40, height: 40))
         backbutton.setImage(#imageLiteral(resourceName: "back button"), for: .normal)
         backbutton.addTarget(self, action:#selector(self.backPressed), for: .touchUpInside)
         self.view.addSubview(backbutton)
@@ -75,36 +77,38 @@ class TripDetailView: UIViewController
     
     func setBottomView()
     {
-        let origin = TripOriginDestination()
-        origin.frame = CGRect(x: 0, y: self.view.bounds.height * 0.2, width: self.view.bounds.width / 2, height: self.view.bounds.height - self.topView.frame.maxY)
-        origin.route = "400 Daisy Dr., Allen, TX"
-        origin.arival = "11:25 am"
-        origin.type = false
-        origin.startTime = "10:45 am"
+//        let origin = TripOriginDestination()
+//        origin.frame = CGRect(x: 0, y: self.view.bounds.height * 0.2, width: self.view.bounds.width / 2, height: self.view.bounds.height * 0.2 + 145)
+//        origin.route = "400 Daisy Dr., Allen, TX"
+//        origin.arival = "11:25 am"
+//        origin.type = false
+//        origin.startTime = "10:45 am"
+//        origin.totalHeight = self.view.bounds.height
         
         let destination = TripOriginDestination()
-        destination.frame = CGRect(x: self.view.bounds.width / 2, y: self.view.bounds.height * 0.2, width: self.view.bounds.width / 2, height: self.view.bounds.height - self.topView.frame.maxY)
+        destination.frame = CGRect(x: 40, y: self.view.bounds.height * 0.2, width: self.view.bounds.width - 80, height: self.view.bounds.height * 0.3 + 170)
         destination.route = "Ikea, 7171 Ikea Dr., Frisco, TX"
         destination.arival = "2:15 pm"
         destination.type = true
         destination.startTime = "2:55 pm"
+        destination.totalHeight = self.view.bounds.height
         
-        self.view.addViews(views: [origin,destination])
+        self.view.addViews(views: [destination])
         
         let description = UITextView()
-        description.frame = CGRect(x: 10, y: destination.frame.maxY, width: self.view.bounds.width, height: 100)
+        description.frame = CGRect(x: 10, y: destination.frame.maxY, width: self.view.bounds.width - 20, height: self.view.bounds.height - (destination.frame.maxY + 70))
         description.text = "Our weekly route to Ikea, where you can get everything you need in a household. Please be ready for pickup on time. Our bus will only wait till scheduled pickup time."
         description.textColor = .black
-        description.backgroundColor = .red
+        description.font = UIFont.systemFont(ofSize: 20.0)
         self.view.addSubview(description)
     }
     
     func setBottomButton()
     {
-        let buttonView = UIView(frame: CGRect(x: 20, y: self.view.bounds.height - 60, width: self.view.bounds.width - 40, height: 60))
+        let buttonView = UIView(frame: CGRect(x: 20, y: self.view.bounds.height - 70, width: self.view.bounds.width - 40, height: 60))
         buttonView.backgroundColor = #colorLiteral(red: 0, green: 0.3921568627, blue: 0.8235294118, alpha: 1)
-        buttonView.layer.cornerRadius = 10
-        let invisButton = UIButton(frame: CGRect(x: 20, y: self.view.bounds.height - 60, width: self.view.bounds.width - 40, height: 60))
+        buttonView.layer.cornerRadius = 15
+        let invisButton = UIButton(frame: CGRect(x: 20, y: self.view.bounds.height - 70, width: self.view.bounds.width - 40, height: 60))
         invisButton.alpha = 0.0
         invisButton.addTarget(self, action: #selector(purchaseWithEbayPressed), for: .touchUpInside)
         let leftLabel = UILabel()
@@ -147,7 +151,7 @@ class TripDetailView: UIViewController
         animation.subtype = .fromBottom
         animation.duration = 0.3
         self.view.window!.layer.add(animation, forKey: nil)
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
 }
 
@@ -158,6 +162,7 @@ class TripOriginDestination: UIView
     var type = Bool() //FALSE = ORIGIN TRUE = DESTINATION
     var startTime = String()
     var arival = String()
+    var totalHeight = CGFloat()
     override init(frame:CGRect) {
         super.init(frame:frame)
     }
@@ -192,7 +197,7 @@ class TripOriginDestination: UIView
         addSubview(routeLabel)
         
         //mapView.mapView.frame = CGRect(x: 10, y:  routeLabel.frame.maxY, width: bounds.width - 20, height: bounds.height * 0.2)
-        let mapHeight = bounds.height * 0.2
+        let mapHeight = totalHeight * 0.3
         mapView.frame = CGRect(x: 10, y:  routeLabel.frame.maxY, width: bounds.width - 20, height: mapHeight)
         mapView.mapView.layer.cornerRadius = 10
         addSubview(mapView)
@@ -207,11 +212,11 @@ class TripOriginDestination: UIView
         //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
         pickup.adjustsFontSizeToFitWidth = true
         pickup.text = "OUTBOUND PICKUP"
-        if(type){typeLabel.text = "INBOUND PICKUP"}
+        if(type){pickup.text = "INBOUND PICKUP"}
         addSubview(pickup)
         
         let pickupTime = UILabel()
-        pickupTime.frame = CGRect(x: 10, y:  pickup.frame.maxY, width: bounds.width - 20, height: 50)
+        pickupTime.frame = CGRect(x: 10, y:  pickup.frame.maxY, width: bounds.width - 20, height: 30)
         pickupTime.font = UIFont.systemFont(ofSize: 20.0)
         pickupTime.textAlignment = .left
         pickupTime.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

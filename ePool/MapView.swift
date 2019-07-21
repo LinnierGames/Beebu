@@ -83,4 +83,16 @@ class MapView: UIView, MKMapViewDelegate
         
         return renderer
     }
+    
+    func dropPinZoomIn(placemark:MKPlacemark){
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        mapView.addAnnotation(annotation)
+        if let location = placemark.location
+        {
+            centerMap(location: location)
+        }
+    }
 }
