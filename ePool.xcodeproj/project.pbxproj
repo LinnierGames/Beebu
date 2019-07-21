@@ -24,6 +24,7 @@
 		AB3A4A9222E40AD1003DAAD0 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A9122E40AD1003DAAD0 /* extensions.swift */; };
 		AB3A4A9422E42118003DAAD0 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A9322E42118003DAAD0 /* TripDetailView.swift */; };
 		E9F3D72922E40ADD0044D53C /* eBayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F3D72822E40ADD0044D53C /* eBayService.swift */; };
+		E9F3D72B22E412BA0044D53C /* eBayAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F3D72A22E412BA0044D53C /* eBayAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		C705517C8454EF4C7551C928 /* Pods_ePool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ePool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E706FA6692CD656653D879E6 /* Pods-ePool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ePool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ePool/Pods-ePool.debug.xcconfig"; sourceTree = "<group>"; };
 		E9F3D72822E40ADD0044D53C /* eBayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eBayService.swift; sourceTree = "<group>"; };
+		E9F3D72A22E412BA0044D53C /* eBayAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eBayAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				E9F3D72822E40ADD0044D53C /* eBayService.swift */,
 				AB3A4A8B22E402DE003DAAD0 /* HomeTBVC.swift */,
 				AB3A4A9322E42118003DAAD0 /* TripDetailView.swift */,
+				E9F3D72A22E412BA0044D53C /* eBayAPI.swift */,
 				AB3A4A7422E3B72C003DAAD0 /* Main.storyboard */,
 				AB3A4A7722E3B72D003DAAD0 /* Assets.xcassets */,
 				AB3A4A7922E3B72D003DAAD0 /* LaunchScreen.storyboard */,
@@ -245,6 +248,7 @@
 				AB3A4A8C22E402DE003DAAD0 /* HomeTBVC.swift in Sources */,
 				AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */,
 				7A950B8422E4398C0044E126 /* TripActiveTableViewCell.swift in Sources */,
+				E9F3D72B22E412BA0044D53C /* eBayAPI.swift in Sources */,
 				AB3A4A8722E3F218003DAAD0 /* MapView.swift in Sources */,
 				E9F3D72922E40ADD0044D53C /* eBayService.swift in Sources */,
 				7A9E951A22E42D6900201E36 /* MyRidesViewController.swift in Sources */,
