@@ -8,15 +8,31 @@
 
 import UIKit
 import WebKit
+import Moya
+import Result
 
 protocol eBayServiceDelegate: class {
   func eBayDidLoadUserCredentials(_ eBayService: eBayService)
 }
 
-class eBayService: EbayVcDelegate {
-  let clientID = "ErickSan-Sample-PRD-cd8d798b5-a58960b7"
-  let clientSecret = "PRD-d8d798b5fe8a-d704-4c61-b082-9dc2"
-  let ruName = "Erick_Sanchez-ErickSan-Sample-eflcxsc"
+struct Listing {
+
+}
+
+extension Listing {
+  fileprivate init(_ listingData: ListingData) {
+
+  }
+}
+
+struct ListingData: Decodable {
+
+}
+
+class eBayService {
+  static let clientID = "ErickSan-Sample-PRD-cd8d798b5-a58960b7"
+  static let clientSecret = "PRD-d8d798b5fe8a-d704-4c61-b082-9dc2"
+  static let ruName = "Erick_Sanchez-ErickSan-Sample-eflcxsc"
 
   weak var delegate: eBayServiceDelegate?
   var currentAuthViewController: EbayVc? = nil
@@ -24,6 +40,68 @@ class eBayService: EbayVcDelegate {
   private var accessToken: String? {
     return UserDefaults.standard.string(forKey: "USER_ACCESS_TOKEN")
   }
+  private let eBayApi = MoyaProvider<eBayAPI>()
+
+  func listListings(_ completion: @escaping ([Listing]) -> Void) {
+    self.eBayApi.request(.listListings, completion: self.handleResponse({ (listingData: [ListingData]?) in
+      guard let listingData = listingData else {
+        return completion([])
+      }
+
+      completion(listingData.map(Listing.init))
+    }))
+  }
+
+  private func fetchUserAccessToken(from code: String) {
+    self.eBayApi.request(.userToken(code: code), completion: self.handleResponse(data: { data in
+      guard let data = data,
+        let object = try? JSONSerialization
+          .jsonObject(
+            with: data,
+            options: JSONSerialization.ReadingOptions.allowFragments
+          ) as? [String: Any]
+      else {
+        return print("failed")
+      }
+
+      let accessToken = object["access_token"]! as! String
+      self.store(accessToken)
+      self.delegate?.eBayDidLoadUserCredentials(self)
+    }))
+  }
+
+  private func handleResponse<T: Decodable>(_ converter: @escaping (T?) -> Void) -> (Result<Moya.Response, Moya.MoyaError>) -> Void {
+    return self.handleResponse(data: { data in
+      guard let data = data else {
+        return converter(nil)
+      }
+
+      guard let converted = try? JSONDecoder().decode(T.self, from: data) else {
+        return converter(nil)
+      }
+
+      converter(converted)
+    })
+  }
+
+  private func handleResponse(data converter: @escaping (Data?) -> Void) -> (Result<Moya.Response, Moya.MoyaError>) -> Void {
+    return { result in
+      switch result {
+      case .success(let response):
+        converter(response.data)
+      case .failure(let error):
+        assertionFailure(error.localizedDescription)
+        converter(nil)
+      }
+    }
+  }
+
+  private func store(_ accessToken: String) {
+    UserDefaults.standard.set(accessToken, forKey: "USER_ACCESS_TOKEN")
+  }
+}
+
+extension eBayService: EbayVcDelegate {
 
   func authViewController() -> UIViewController {
     let vc = EbayVc()
@@ -36,45 +114,7 @@ class eBayService: EbayVcDelegate {
   func didFetch(_ code: String) {
     self.fetchUserAccessToken(from: code)
   }
-
-  private func fetchUserAccessToken(from code: String) {
-    let urlUserToken = URL(string: "https://api.ebay.com/identity/v1/oauth2/token")!
-    var request = URLRequest(url: urlUserToken)
-
-    request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-
-    let authString = "\(self.clientID):\(self.clientSecret)"
-    request.addValue(
-      "Basic \(Data(authString.utf8).base64EncodedString())", forHTTPHeaderField: "Authorization")
-
-    request.httpMethod = "POST"
-    request.httpBody =
-      "grant_type=authorization_code&code=\(code)&redirect_uri=\(self.ruName)"
-        .data(using: String.Encoding.utf8)!
-    URLSession.shared.dataTask(with: request) { (data, response, error) in
-      if let error = error {
-        return print(error)
-      }
-
-      guard let data = data,
-        let object = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any] else {
-          return print("failed")
-      }
-
-      let accessToken = object["access_token"]! as! String
-      self.store(accessToken)
-      self.delegate?.eBayDidLoadUserCredentials(self)
-
-    }.resume()
-  }
-
-  private func store(_ accessToken: String) {
-    UserDefaults.standard.set(accessToken, forKey: "USER_ACCESS_TOKEN")
-  }
 }
-
-
-
 
 protocol EbayVcDelegate: class {
   func didFetch(_ code: String)

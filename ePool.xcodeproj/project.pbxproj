@@ -15,6 +15,7 @@
 		AB3A4A7B22E3B72D003DAAD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7922E3B72D003DAAD0 /* LaunchScreen.storyboard */; };
 		AB3A4A8722E3F218003DAAD0 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A8622E3F218003DAAD0 /* MapView.swift */; };
 		E9F3D72922E40ADD0044D53C /* eBayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F3D72822E40ADD0044D53C /* eBayService.swift */; };
+		E9F3D72B22E412BA0044D53C /* eBayAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F3D72A22E412BA0044D53C /* eBayAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		C705517C8454EF4C7551C928 /* Pods_ePool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ePool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E706FA6692CD656653D879E6 /* Pods-ePool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ePool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ePool/Pods-ePool.debug.xcconfig"; sourceTree = "<group>"; };
 		E9F3D72822E40ADD0044D53C /* eBayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eBayService.swift; sourceTree = "<group>"; };
+		E9F3D72A22E412BA0044D53C /* eBayAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eBayAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				AB3A4A8622E3F218003DAAD0 /* MapView.swift */,
 				AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */,
 				E9F3D72822E40ADD0044D53C /* eBayService.swift */,
+				E9F3D72A22E412BA0044D53C /* eBayAPI.swift */,
 				AB3A4A7422E3B72C003DAAD0 /* Main.storyboard */,
 				AB3A4A7722E3B72D003DAAD0 /* Assets.xcassets */,
 				AB3A4A7922E3B72D003DAAD0 /* LaunchScreen.storyboard */,
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */,
+				E9F3D72B22E412BA0044D53C /* eBayAPI.swift in Sources */,
 				AB3A4A8722E3F218003DAAD0 /* MapView.swift in Sources */,
 				E9F3D72922E40ADD0044D53C /* eBayService.swift in Sources */,
 				AB3A4A7122E3B72C003DAAD0 /* AppDelegate.swift in Sources */,
