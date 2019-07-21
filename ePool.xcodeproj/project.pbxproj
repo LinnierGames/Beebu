@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		685E2842F27CF0A2BB8606DD /* Pods_ePool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C705517C8454EF4C7551C928 /* Pods_ePool.framework */; };
+		7A950B8422E4398C0044E126 /* TripActiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A950B8322E4398C0044E126 /* TripActiveTableViewCell.swift */; };
+		7A950B8622E439B30044E126 /* TripPastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A950B8522E439B30044E126 /* TripPastTableViewCell.swift */; };
+		7A9E951822E40C2900201E36 /* MyRidesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9E951722E40C2900201E36 /* MyRidesViewController.storyboard */; };
+		7A9E951A22E42D6900201E36 /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9E951922E42D6900201E36 /* MyRidesViewController.swift */; };
+		AB21982522E4B486004CBC80 /* RideDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21982422E4B486004CBC80 /* RideDetailView.swift */; };
+		AB21982722E4CE36004CBC80 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21982622E4CE36004CBC80 /* AccountVC.swift */; };
 		AB3A4A7122E3B72C003DAAD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */; };
 		AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */; };
 		AB3A4A7622E3B72C003DAAD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3A4A7422E3B72C003DAAD0 /* Main.storyboard */; };
@@ -22,6 +28,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A950B8322E4398C0044E126 /* TripActiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripActiveTableViewCell.swift; sourceTree = "<group>"; };
+		7A950B8522E439B30044E126 /* TripPastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPastTableViewCell.swift; sourceTree = "<group>"; };
+		7A9E951722E40C2900201E36 /* MyRidesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRidesViewController.storyboard; sourceTree = "<group>"; };
+		7A9E951922E42D6900201E36 /* MyRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
+		AB21982422E4B486004CBC80 /* RideDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailView.swift; sourceTree = "<group>"; };
+		AB21982622E4CE36004CBC80 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		AB3A4A6D22E3B72C003DAAD0 /* ePool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ePool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +87,7 @@
 			children = (
 				AB3A4A8822E3F946003DAAD0 /* Cells */,
 				AB3A4A7022E3B72C003DAAD0 /* AppDelegate.swift */,
+				AB21982422E4B486004CBC80 /* RideDetailView.swift */,
 				AB3A4A8622E3F218003DAAD0 /* MapView.swift */,
 				AB3A4A7222E3B72C003DAAD0 /* ViewController.swift */,
 				AB3A4A8B22E402DE003DAAD0 /* HomeTBVC.swift */,
@@ -85,6 +98,7 @@
 				AB3A4A7C22E3B72D003DAAD0 /* Info.plist */,
 				AB3A4A8F22E40A61003DAAD0 /* TabBar.swift */,
 				AB3A4A9122E40AD1003DAAD0 /* extensions.swift */,
+				AB21982622E4CE36004CBC80 /* AccountVC.swift */,
 			);
 			path = ePool;
 			sourceTree = "<group>";
@@ -228,8 +242,12 @@
 				AB3A4A8C22E402DE003DAAD0 /* HomeTBVC.swift in Sources */,
 				AB3A4A7322E3B72C003DAAD0 /* ViewController.swift in Sources */,
 				AB3A4A8722E3F218003DAAD0 /* MapView.swift in Sources */,
+				E9F3D72922E40ADD0044D53C /* eBayService.swift in Sources */,
+				7A9E951A22E42D6900201E36 /* MyRidesViewController.swift in Sources */,
+				AB21982522E4B486004CBC80 /* RideDetailView.swift in Sources */,
 				AB3A4A9222E40AD1003DAAD0 /* extensions.swift in Sources */,
 				AB3A4A9422E42118003DAAD0 /* TripDetailView.swift in Sources */,
+				AB21982722E4CE36004CBC80 /* AccountVC.swift in Sources */,
 				AB3A4A9022E40A61003DAAD0 /* TabBar.swift in Sources */,
 				AB3A4A8A22E3F952003DAAD0 /* HomeCell.swift in Sources */,
 				AB3A4A7122E3B72C003DAAD0 /* AppDelegate.swift in Sources */,

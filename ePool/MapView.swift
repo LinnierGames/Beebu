@@ -12,21 +12,44 @@ import Foundation
 class MapView: UIView, MKMapViewDelegate
 {
     var mapView = MKMapView()
-    
+    var lat: CLLocationDegrees?
+    var long: CLLocationDegrees?
+    var annotationTitle: String?
     override func layoutSubviews() {
         super.layoutSubviews()
         mapView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         mapView.delegate = self
-        centerMap(location: CLLocation(latitude: 37.7862002, longitude: -122.408004))
+        if let theLat = lat
+        {
+             centerMap(location: CLLocation(latitude: theLat, longitude: long!))
+        }else{
+            let ran = Float.random(in: 0 ..< 1)
+            self.lat = Double(37.7862002 + ran * 0.01)
+            self.long = Double(-122.408004 + ran * 0.01)
+        }
+       
         addSubview(mapView)
     }
-    
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        print("CALLED")
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+        if let t = annotationTitle{
+            annotation.title = t
+        }
+        mapView.addAnnotation(annotation)
+        self.mapView.showAnnotations([annotation], animated: false)
+    }
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        //dropPinZoomIn(lat: 37.7862002, long: -122.408004, titleString: "Start")
+    }
     func centerMap(location: CLLocation)
     {
         let regionRadius: CLLocationDistance = 1000
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
                                                   latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-        mapView.setRegion(coordinateRegion, animated: true)
+        mapView.setRegion(coordinateRegion, animated: false)
+       
     }
     
     func createRoute(sourcePlacemark: MKPlacemark, destinationPlacemark: MKPlacemark)
@@ -82,17 +105,5 @@ class MapView: UIView, MKMapViewDelegate
         renderer.lineWidth = 4.0
         
         return renderer
-    }
-    
-    func dropPinZoomIn(placemark:MKPlacemark){
-        mapView.removeAnnotations(mapView.annotations)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.name
-        mapView.addAnnotation(annotation)
-        if let location = placemark.location
-        {
-            centerMap(location: location)
-        }
     }
 }

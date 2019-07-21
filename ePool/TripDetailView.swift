@@ -16,6 +16,11 @@ class TripDetailView: UIViewController
     var topView = UIView()
     var buttonView = UIView()
     
+    override func viewDidLayoutSubviews() {
+        
+        let bottom = self.view.safeAreaInsets.bottom
+       buttonView.frame = CGRect(x: 20, y: self.view.bounds.height - (60 + bottom), width: self.view.bounds.width - 40, height: 60)
+    }
     override func viewWillLayoutSubviews() {
         navigationController?.isNavigationBarHidden = true
     }
@@ -85,11 +90,11 @@ class TripDetailView: UIViewController
 //        origin.startTime = "10:45 am"
 //        origin.totalHeight = self.view.bounds.height
         
-        let destination = TripOriginDestination()
-        destination.frame = CGRect(x: 40, y: self.view.bounds.height * 0.2, width: self.view.bounds.width - 80, height: self.view.bounds.height * 0.3 + 170)
+        let destination = TripDestination()
+        destination.frame = CGRect(x: 40, y: self.view.bounds.height * 0.2, width: self.view.bounds.width - 80, height: self.view.bounds.height * 0.25 + 170)
         destination.route = "Ikea, 7171 Ikea Dr., Frisco, TX"
         destination.arival = "2:15 pm"
-        destination.type = true
+        //destination.type = true
         destination.startTime = "2:55 pm"
         destination.totalHeight = self.view.bounds.height
         
@@ -99,21 +104,23 @@ class TripDetailView: UIViewController
         description.frame = CGRect(x: 10, y: destination.frame.maxY, width: self.view.bounds.width - 20, height: self.view.bounds.height - (destination.frame.maxY + 70))
         description.text = "Our weekly route to Ikea, where you can get everything you need in a household. Please be ready for pickup on time. Our bus will only wait till scheduled pickup time."
         description.textColor = .black
+        description.textAlignment = .justified
         description.font = UIFont.systemFont(ofSize: 20.0)
+        description.isEditable = false
+        description.sizeToFit()
         self.view.addSubview(description)
     }
     
     func setBottomButton()
     {
-        let buttonView = UIView(frame: CGRect(x: 20, y: self.view.bounds.height - 70, width: self.view.bounds.width - 40, height: 60))
+        
+        buttonView = UIView(frame: CGRect(x: 20, y: self.view.bounds.height - 60, width: self.view.bounds.width - 40, height: 60))
         buttonView.backgroundColor = #colorLiteral(red: 0, green: 0.3921568627, blue: 0.8235294118, alpha: 1)
         buttonView.layer.cornerRadius = 15
-        let invisButton = UIButton(frame: CGRect(x: 20, y: self.view.bounds.height - 70, width: self.view.bounds.width - 40, height: 60))
-        invisButton.alpha = 0.0
-        invisButton.addTarget(self, action: #selector(purchaseWithEbayPressed), for: .touchUpInside)
+        buttonView.gestureRecognizers = [UITapGestureRecognizer(target: self, action:  #selector (self.viewTapped(_:)))]
         let leftLabel = UILabel()
         leftLabel.frame = CGRect(x: 10, y: 0, width: buttonView.bounds.width - 20, height: buttonView.bounds.height / 2)
-        leftLabel.font = UIFont.systemFont(ofSize: 25.0)
+        leftLabel.font = UIFont.boldSystemFont(ofSize: 25)
         leftLabel.textAlignment = .center
         leftLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         //tripLabel.shadowColor = .black
@@ -125,7 +132,7 @@ class TripDetailView: UIViewController
         
         let rightLabel = UILabel()
         rightLabel.frame = CGRect(x: 10, y: buttonView.bounds.height / 2 - 5, width: buttonView.bounds.width - 20, height: buttonView.bounds.height / 2)
-        rightLabel.font = UIFont.systemFont(ofSize: 22.0)
+        rightLabel.font = UIFont.boldSystemFont(ofSize: 22)
         rightLabel.textAlignment = .center
         rightLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         //tripLabel.shadowColor = .black
@@ -133,15 +140,15 @@ class TripDetailView: UIViewController
         rightLabel.adjustsFontSizeToFitWidth = true
         rightLabel.text = ("Round Trip")
         buttonView.addSubview(rightLabel)
-        
         self.view.addSubview(buttonView)
-        self.view.addSubview(invisButton)
+        
         
     }
     
-    @objc func purchaseWithEbayPressed()
+    @objc func viewTapped (_ sender : UITapGestureRecognizer)
     {
         print("purchaseWithEbayPressed")
+        sender.view?.shake()
     }
     @objc func backPressed()
     {
@@ -197,7 +204,7 @@ class TripOriginDestination: UIView
         addSubview(routeLabel)
         
         //mapView.mapView.frame = CGRect(x: 10, y:  routeLabel.frame.maxY, width: bounds.width - 20, height: bounds.height * 0.2)
-        let mapHeight = totalHeight * 0.3
+        let mapHeight = totalHeight * 0.2
         mapView.frame = CGRect(x: 10, y:  routeLabel.frame.maxY, width: bounds.width - 20, height: mapHeight)
         mapView.mapView.layer.cornerRadius = 10
         addSubview(mapView)
@@ -241,6 +248,98 @@ class TripOriginDestination: UIView
         arrivalTime.frame = CGRect(x: 10, y:  arrivalLabel.frame.maxY, width: bounds.width - 20, height: 22)
         arrivalTime.font = UIFont.systemFont(ofSize: 20.0)
         arrivalTime.textAlignment = .left
+        arrivalTime.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        //tripLabel.shadowColor = .black
+        //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
+        arrivalTime.adjustsFontSizeToFitWidth = true
+        arrivalTime.text = arival
+        addSubview(arrivalTime)
+    }
+    
+}
+class TripDestination: UIView
+{
+    var mapView = MapView()
+    var route = String()
+    var startTime = String()
+    var arival = String()
+    var totalHeight = CGFloat()
+    override init(frame:CGRect) {
+        super.init(frame:frame)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        print(frame)
+        let typeLabel = UILabel()
+        typeLabel.frame = CGRect(x: 10, y: 10, width: bounds.width - 20, height: 22)
+        typeLabel.font = UIFont.systemFont(ofSize: 20.0)
+        typeLabel.textAlignment = .center
+        typeLabel.textColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
+        //tripLabel.shadowColor = .black
+        //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
+        typeLabel.adjustsFontSizeToFitWidth = true
+        typeLabel.text = "DESTINATION"
+        addSubview(typeLabel)
+        
+        let routeLabel = UILabel()
+        routeLabel.frame = CGRect(x: 10, y:  typeLabel.frame.maxY, width: bounds.width - 20, height: 25)
+        routeLabel.font = UIFont.systemFont(ofSize: 20.0)
+        routeLabel.textAlignment = .center
+        routeLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        //tripLabel.shadowColor = .black
+        //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
+        routeLabel.adjustsFontSizeToFitWidth = true
+        routeLabel.text = route
+        addSubview(routeLabel)
+        
+        //mapView.mapView.frame = CGRect(x: 10, y:  routeLabel.frame.maxY, width: bounds.width - 20, height: bounds.height * 0.2)
+        let mapHeight = totalHeight * 0.25
+        mapView.frame = CGRect(x: 10, y:  routeLabel.frame.maxY, width: bounds.width - 20, height: mapHeight)
+        mapView.mapView.layer.cornerRadius = 10
+        addSubview(mapView)
+        
+        
+        let pickup = UILabel()
+        pickup.frame = CGRect(x: 10, y:  mapView.frame.maxY + 10, width: bounds.width - 20, height: 22)
+        pickup.font = UIFont.systemFont(ofSize: 20.0)
+        pickup.textAlignment = .center
+        pickup.textColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
+        //tripLabel.shadowColor = .black
+        //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
+        pickup.adjustsFontSizeToFitWidth = true
+        pickup.text = "INBOUND PICKUP"
+        addSubview(pickup)
+        
+        let pickupTime = UILabel()
+        pickupTime.frame = CGRect(x: 10, y:  pickup.frame.maxY, width: bounds.width - 20, height: 30)
+        pickupTime.font = UIFont.systemFont(ofSize: 20.0)
+        pickupTime.textAlignment = .center
+        pickupTime.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        //tripLabel.shadowColor = .black
+        //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
+        pickupTime.adjustsFontSizeToFitWidth = true
+        pickupTime.text = startTime
+        addSubview(pickupTime)
+        
+        let arrivalLabel = UILabel()
+        arrivalLabel.frame = CGRect(x: 10, y:  pickupTime.frame.maxY, width: bounds.width - 20, height: 22)
+        arrivalLabel.font = UIFont.systemFont(ofSize: 20.0)
+        arrivalLabel.textAlignment = .center
+        arrivalLabel.textColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
+        //tripLabel.shadowColor = .black
+        //tripLabel.shadowOffset = CGSize(width: -2, height: 2)
+        arrivalLabel.adjustsFontSizeToFitWidth = true
+        arrivalLabel.text = "ARRIVAL"
+        self.addSubview(arrivalLabel)
+        
+        let arrivalTime = UILabel()
+        arrivalTime.frame = CGRect(x: 10, y:  arrivalLabel.frame.maxY, width: bounds.width - 20, height: 22)
+        arrivalTime.font = UIFont.systemFont(ofSize: 20.0)
+        arrivalTime.textAlignment = .center
         arrivalTime.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         //tripLabel.shadowColor = .black
         //tripLabel.shadowOffset = CGSize(width: -2, height: 2)

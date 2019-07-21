@@ -27,6 +27,12 @@ class TabBar: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Tab Bar was loaded")
+
+        let storyboard = UIStoryboard(name: "MyRidesViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "MyRidesViewController")
+        
+        viewControllerStrings = ["Home","MyRides","Account"]
+        viewControllers = [UINavigationController(rootViewController: HomeTBVC()),UINavigationController(rootViewController: controller),UINavigationController(rootViewController: AccountVC())]
         
         buttonContainer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).withAlphaComponent(0.8)
         buttonContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
